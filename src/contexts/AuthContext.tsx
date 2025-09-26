@@ -44,21 +44,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     setIsLoading(true);
     try {
-      // For static export, use mock data
-      const mockProfiles = [
-        {
-          id: 'mock-1',
-          name: 'Sample Business Profile',
-          address: '123 Main St, City, State 12345',
-          phone: '+1 (555) 123-4567',
-          website: 'https://example.com',
-          isConnected: false,
-          lastSync: new Date(),
-          accountId: 'mock-account-1',
-          locationId: 'mock-location-1'
-        }
-      ];
-      setBusinessProfiles(mockProfiles);
+      const response = await fetch('/api/business-profiles');
+      const data = await response.json();
+      
+      if (response.ok) {
+        setBusinessProfiles(data.profiles);
+      } else {
+        console.error('Error fetching business profiles:', data.error);
+      }
     } catch (error) {
       console.error('Error fetching business profiles:', error);
     } finally {
@@ -77,28 +70,50 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const createPost = async (locationId: string, postData: any) => {
     if (!session?.accessToken) throw new Error('Not authenticated');
     
-    // For static export, simulate post creation
-    console.log('Creating post:', { locationId, postData });
-    return { id: 'mock-post-' + Date.now(), ...postData };
+    const response = await fetch('/api/posts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        locationId,
+        postData
+      })
+    });
+    
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to create post');
+    }
+    
+    return data.post;
   };
 
   const getPosts = async (locationId: string) => {
     if (!session?.accessToken) throw new Error('Not authenticated');
     
-    // For static export, return mock posts
-    return [];
+    const response = await fetch(`/api/posts?locationId=${locationId}`);
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to fetch posts');
+    }
+    
+    return data.posts;
   };
 
   const getInsights = async (locationId: string, startDate: string, endDate: string) => {
     if (!session?.accessToken) throw new Error('Not authenticated');
     
-    // For static export, return mock insights
-    return {
-      impressions: 1250,
-      clicks: 89,
-      interactions: 156,
-      views: 2100
-    };
+    const response = await fetch(`/api/insights?locationId=${locationId}&startDate=${startDate}&endDate=${endDate}`);
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to fetch insights');
+    }
+    
+    return data.insights;
   };
 
   useEffect(() => {

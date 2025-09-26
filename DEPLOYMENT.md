@@ -78,13 +78,15 @@ GOOGLE_CLIENT_SECRET=your-google-client-secret
 - Mock data display
 - Navigation between pages
 - Form interactions
-- Authentication UI (login/logout buttons)
+- **Mock Authentication System** (login/logout working)
+- **Demo Mode** with sample user data
+- **Business Profile Management** (mock data)
 
 ⚠️ **Limited Features** (due to static export):
-- Google OAuth authentication (requires server-side)
+- Real Google OAuth authentication (requires server-side)
 - Real Google Business Profile API calls
-- Post creation and scheduling
-- Data persistence
+- Actual post creation and scheduling
+- Data persistence across sessions
 
 ## Upgrading to Full Functionality
 
