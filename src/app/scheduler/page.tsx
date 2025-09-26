@@ -3,14 +3,14 @@
 import { SessionProvider } from "next-auth/react";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { Layout } from '@/components/layout/Layout';
-import { Dashboard } from '@/components/dashboard/Dashboard';
+import { Scheduler } from '@/components/scheduler/Scheduler';
 
-export default function Home() {
+export default function SchedulerPage() {
   return (
     <SessionProvider>
       <AuthProvider>
         <Layout>
-          <Dashboard />
+          <Scheduler />
         </Layout>
       </AuthProvider>
     </SessionProvider>

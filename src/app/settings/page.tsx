@@ -3,14 +3,14 @@
 import { SessionProvider } from "next-auth/react";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { Layout } from '@/components/layout/Layout';
-import { Dashboard } from '@/components/dashboard/Dashboard';
+import { Settings } from '@/components/settings/Settings';
 
-export default function Home() {
+export default function SettingsPage() {
   return (
     <SessionProvider>
       <AuthProvider>
         <Layout>
-          <Dashboard />
+          <Settings />
         </Layout>
       </AuthProvider>
     </SessionProvider>
