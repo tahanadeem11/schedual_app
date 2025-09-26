@@ -1,0 +1,25 @@
+# cPanel Deployment Package
+
+This file contains instructions for creating a deployment package.
+
+## To create the deployment package:
+
+1. Navigate to your project directory
+2. Create a zip file of the `out/` folder contents
+3. Upload the zip file to your cPanel File Manager
+4. Extract it in your public_html directory
+
+## Files to include in the package:
+
+- All files from the `out/` directory
+- `DEPLOYMENT.md` (deployment guide)
+- `production.env.example` (environment variables template)
+
+## Quick deployment steps:
+
+1. Zip the contents of the `out/` folder
+2. Upload to cPanel File Manager
+3. Extract in public_html
+4. Test your domain
+
+The application is ready for deployment!
